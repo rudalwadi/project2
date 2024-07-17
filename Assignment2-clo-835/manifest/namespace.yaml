@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sql-ns
+  labels:
+    name: sql-ns
+
+---
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: webapp-ns
+  labels:
+    name: webapp-ns

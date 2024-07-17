@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-v2
+  namespace: webapp-ns
+  labels:
+    app: webapp
+    version: v2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webapp
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: webapp
+        version: v2
+    spec:
+      containers:
+      - name: webapp-v2
+        image: 407373101635.dkr.ecr.us-east-1.amazonaws.com/assignment-1-app:010c8d006a
+        env:
+        - name: DBHOST
+          value: "10.244.0.5"
+        - name: DBPORT
+          value: "3306"
+        - name: DATABASE
+          value: "employees"
+        - name: DBUSER
+          valueFrom:
+            secretKeyRef:
+              name: db-secrets
+              key: user
+        - name: DBPWD
+          valueFrom:
+            secretKeyRef:
+              name: db-secrets
+              key: password
+        ports:
+        - containerPort: 8080
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
