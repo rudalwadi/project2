@@ -1,0 +1,10 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+  image: kindest/node:v1.24.0@sha256:b50bd8f4b1b7a8f7a9a26c5b1ff1b2a4d2c5aefc6f9a4d7d3f50b5e0fb70a81a
+  extraPortMappings:
+  - containerPort: 30000
+    hostPort: 30000
+  - containerPort: 30001
+    hostPort: 30001
